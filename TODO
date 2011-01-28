@@ -1,0 +1,16 @@
+* HECHO Cada movimiento debe contener: Cuenta asociada, fecha del movimiento, tipo de movimiento, concepto y valor.
+* El valor de un movimiento puede ser positivo o negativo.
+* Se podrá obtener el saldo correspondiente a los valores mostrados.
+** Una consulta es una lista de movimientos.
+** Se podrá obtener el valor total de una consulta.
+** Se podrá obtener el valor total de todos los movimientos
+** Se podrá obtener el valor total de todos los movimientos asociados a una cuenta.
+* Se podrán limitar los valores a un rango de fechas
+* Se podrán limitar los valores por cuenta.
+* Se podrán realizar varias limitaciones al mismo tiempo (Ej: fechas y cuenta).
+* Se podrán calcular los movimientos futuros, teniendo en cuenta el histórico mensual y el anual.
+* Se mostrará un gráfico de líneas con la evolución de gastos, ingresos y beneficios.
+* Posibilidad de importar otros formatos. Esta importación deberá tener encuenta entradas ya existentes (por coincidencia de cuenta, fecha y cantidad). Deberá permitir importa CSV.
+** Deseable la importación de Html.
+** Deseable la importación de Excel.
+** Deseable la importación de Q43.
