@@ -42,4 +42,10 @@ class Movement_test < Test::Unit::TestCase
     @sut.value = value
     assert_equal @sut.value, value
   end
+
+  def test_value_can_be_negative
+    value = -12345
+    @sut.value = value
+    assert_equal @sut.value, value
+  end
 end
