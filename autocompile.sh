@@ -2,7 +2,7 @@
 
 #Script based on the "fexec" function of ARCO Lab http://arco.inf-cr.uclm.es
 
-COMPILER=rake1.9
+COMPILER=rake1.9.1
 ICON="gtk-yes"
 
 while [ 1 ]; do
@@ -19,8 +19,8 @@ while [ 1 ]; do
 
     notify-send -t 1000 -i $ICON "OKANE returned: $retval"
 
-    inotifywait -qr -e MODIFY . || break
-    
+    inotifywait -qr -e MODIFY . @.git @#*# @*.~ || break
+
     sync
     sleep 0.5
 done

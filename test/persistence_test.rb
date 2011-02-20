@@ -1,51 +1,90 @@
 # -*- coding: utf-8 -*-
-require 'date.rb'
+
 require 'test/unit'
-require 'lib/persistence.rb'
+#require 'test/unit/notify'
+require 'rubygems'
+require 'dm-core'
+require './lib/persistence'
+require  'dm-migrations'
 
-class Movement_test < Test::Unit::TestCase
-  @sut = nil
+class TestPersistence < Test::Unit::TestCase
+
   def setup
-    @sut = Movement.new
+    DataMapper::Logger.new($stdout, :debug)
+    DataMapper.setup(:default, 'sqlite::memory:')
+    #DataMapper.setup(:default, 'sqlite:///path/to/project.db')
+    #DataMapper.setup(:default, 'mysql://localhost/the_database_name')
+    DataMapper::Model.raise_on_save_failure = true
+    DataMapper.auto_migrate!
   end
 
-  def test_has_associated_account
-    account = 123456789
-    @sut.associated_account = account
-    assert_equal @sut.associated_account, account
+  def test_create_Account
+    account = Account.create :name => 'Inject the Venom'
+    assert account.valid?
+    account.save
+
+    assert_equal 1, Account.count
   end
 
-  def test_has_date_of_movement
-    date = Date.new
-    @sut.date = date
-    assert_equal @sut.date, date
+  def test_account_name_is_mandatory
+    assert_raises DataMapper::SaveFailureError do
+      account = Account.create
+      account.save
+    end
   end
 
-  def test_today_is_the_default_date
-    assert_equal @sut.date, Date.today
+  def test_create_Movement
+    account = Account.create :name => 'Hell Bells'
+    account.save
+    movement = Movement.new
+    movement.value = 1000
+    movement.concept = 'Blackice'
+    movement.account = account
+    assert movement.valid?
+    movement.save
+
+    assert_equal 1, Movement.count
   end
 
-  def test_has_type_of_movement
-    type = 'Cowboys from Hell'
-    @sut.type = type
-    assert_equal @sut.type, type
+  def test_movements_has_default_date
+    account = Account.create :name => 'Jailbreak'
+    account.save
+    movement = Movement.new
+    movement.account = account
+    movement.value = 1
+    movement.concept = 'Show Business'
+
+    assert_equal false, (movement.date==nil)
   end
 
-  def test_has_concept
-    concept = 'Nothing else Mathers'
-    @sut.concept = concept
-    assert_equal @sut.concept, concept
-  end
-  
-  def test_has_value
-    value = 12345
-    @sut.value = value
-    assert_equal @sut.value, value
+  def test_movements_must_have_an_account
+    assert_raises DataMapper::SaveFailureError do
+      movement = Movement.create
+      movement.concept = "You ain't got a hold on me"
+      movement.value = 99
+      movement.save
+    end
   end
 
-  def test_value_can_be_negative
-    value = -12345
-    @sut.value = value
-    assert_equal @sut.value, value
+  def test_movements_must_have_a_value
+    account = Account.create :name => "Soul Stripper"
+    account.save
+    assert_raises DataMapper::SaveFailureError do
+      movement = Movement.create
+      movement.concept = "Baby, please don't go"
+      movement.account = account
+      movement.save
+    end
+  end
+
+  def test_movements_must_have_a_concept
+    account = Account.create :name => "Rock N Rock Train"
+    account.save
+    assert_raises DataMapper::SaveFailureError do
+      movement = Movement.create
+      movement.value = 10000
+      movement.account = account
+      movement.save
+    end
   end
 end

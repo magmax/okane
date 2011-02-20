@@ -1,5 +1,6 @@
 * HECHO Cada movimiento debe contener: Cuenta asociada, fecha del movimiento, tipo de movimiento, concepto y valor.
 * HECHO El valor de un movimiento puede ser positivo o negativo.
+* Los movimientos se guardarán de forma persistente.
 * Se podrá obtener el saldo correspondiente a los valores mostrados.
 ** Una consulta es una lista de movimientos.
 ** Se podrá obtener el valor total de una consulta.
