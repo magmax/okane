@@ -5,7 +5,7 @@
 
   <p>
     <%= f.label :account %><br />
-    <%= f.text_field :account %>
+    <%= select ("movement", "account_id", Account.all.collect {|acc| [acc.name, acc.id] } ) %>
   </p>
   <p>
     <%= f.label :date %><br />

@@ -4,6 +4,10 @@
   <%= f.error_messages %>
 
   <p>
+    <%= f.label :account %><br />
+    <%= select ("movement", "account_id", Account.all.collect {|acc| [acc.name, acc.id] } ) %>
+  </p>
+  <p>
     <%= f.label :date %><br />
     <%= f.date_select :date %>
   </p>

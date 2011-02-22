@@ -2,6 +2,7 @@
 
 <table>
   <tr>
+    <th>Account</th>
     <th>Date</th>
     <th>Clasification</th>
     <th>Concept</th>
@@ -10,7 +11,7 @@
 
 <% @movements.each do |movement| %>
   <tr>
-    <td><%=h movement.account %></td>
+    <td><%=h movement.account.name %></td>
     <td><%=h movement.date %></td>
     <td><%=h movement.clasification %></td>
     <td><%=h movement.concept %></td>

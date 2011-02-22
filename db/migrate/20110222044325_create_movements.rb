@@ -5,6 +5,7 @@ class CreateMovements < ActiveRecord::Migration
       t.string :clasification
       t.string :concept
       t.integer :value
+      t.integer :account_id
 
       t.timestamps
     end

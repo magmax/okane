@@ -25,6 +25,7 @@ class MovementsController < ApplicationController
   # GET /movements/new.xml
   def new
     @movement = Movement.new
+    @accounts = Account.all
 
     respond_to do |format|
       format.html # new.html.erb
