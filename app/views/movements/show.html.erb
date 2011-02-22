@@ -1,0 +1,23 @@
+<p>
+  <b>Date:</b>
+  <%=h @movement.date %>
+</p>
+
+<p>
+  <b>Type:</b>
+  <%=h @movement.type %>
+</p>
+
+<p>
+  <b>Concept:</b>
+  <%=h @movement.concept %>
+</p>
+
+<p>
+  <b>Value:</b>
+  <%=h @movement.value %>
+</p>
+
+
+<%= link_to 'Edit', edit_movement_path(@movement) %> |
+<%= link_to 'Back', movements_path %>

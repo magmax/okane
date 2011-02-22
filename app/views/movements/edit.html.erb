@@ -1,0 +1,28 @@
+<h1>Editing movement</h1>
+
+<% form_for(@movement) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :date %><br />
+    <%= f.date_select :date %>
+  </p>
+  <p>
+    <%= f.label :clasification %><br />
+    <%= f.text_field :clasification %>
+  </p>
+  <p>
+    <%= f.label :concept %><br />
+    <%= f.text_field :concept %>
+  </p>
+  <p>
+    <%= f.label :value %><br />
+    <%= f.text_field :value %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @movement %> |
+<%= link_to 'Back', movements_path %>
